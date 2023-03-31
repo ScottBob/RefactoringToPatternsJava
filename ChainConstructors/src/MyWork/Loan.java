@@ -11,11 +11,7 @@ public class Loan {
     private ZonedDateTime maturity;
 
     public Loan(float notional, float outstanding, int rating, ZonedDateTime expiry) {
-        this.strategy = new TermROC();
-        this.notional = notional;
-        this.outstanding = outstanding;
-        this.rating = rating;
-        this.expiry = expiry;
+        this(new TermROC(), notional, outstanding, rating, expiry, null);
     }
 
     public Loan(float notional, float outstanding, int rating, ZonedDateTime expiry, ZonedDateTime maturity) {
