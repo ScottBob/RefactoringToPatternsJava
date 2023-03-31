@@ -22,7 +22,11 @@ public class TagBuilder {
     }
 
     public void addToParent(String parentTagName, String childTagName) {
-        addTo(findParentBy(parentTagName), childTagName);
+        TagNode parentNode = findParentBy(parentTagName);
+        if (parentNode == null) {
+           throw new RuntimeException("missing parent tag: " + parentTagName);
+        }
+        addTo(parentNode, childTagName);
     }
 
     private void addTo(TagNode parentNode, String tagName) {
