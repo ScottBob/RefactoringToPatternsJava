@@ -15,7 +15,7 @@ public class DescriptorMapper {
     protected List<AttributeDescriptor> createAttributeDescriptors() {
         List<AttributeDescriptor> result = new ArrayList<>();
 
-        result.add(forInteger("remoteId", GetClass(), Integer.TYPE));
+        result.add(forInteger("remoteId", GetClass()));
         result.add(new DefaultDescriptor("createdDate", GetClass(), ZonedDateTime.class));
         result.add(new DefaultDescriptor("lastChangedDate", GetClass(), ZonedDateTime.class));
         result.add(new ReferenceDescriptor("createdBy", GetClass(), User.class));
@@ -24,7 +24,7 @@ public class DescriptorMapper {
         return result;
     }
 
-    public static DefaultDescriptor forInteger(String descriptorName, Type type, Class<Integer> integerClass) {
+    public static DefaultDescriptor forInteger(String descriptorName, Type type) {
         return new DefaultDescriptor(descriptorName, DescriptorMapper.class, Integer.class);
     }
 
