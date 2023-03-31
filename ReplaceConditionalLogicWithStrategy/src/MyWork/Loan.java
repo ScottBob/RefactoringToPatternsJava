@@ -34,7 +34,7 @@ public class Loan {
     public static Loan newRevolver(double commitment, ZonedDateTime start, ZonedDateTime expiry, int riskRating)
     {
         return new Loan(commitment, 0, start, expiry,
-                null, riskRating, new CapitalStrategy());
+                null, riskRating, new CapitalStrategyRevolver());
     }
 
     public static Loan newAdvisedLine(double commitment, ZonedDateTime start, ZonedDateTime expiry, int riskRating)
