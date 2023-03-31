@@ -13,4 +13,12 @@ public class TagTests {
         String expected = "<price currency=" + "'" + "USD" + "'>" + SAMPLE_PRICE + "</price>";
         Assert.assertEquals("price XML", expected, priceTag.toString());
     }
+
+    @Test
+    public void test_composite_tag_one_child() {
+        TagNode productTag = new TagNode("product");
+        productTag.addValue(new TagNode("price"));
+        String expected = "<product>" + "<price>" + "</price>" + "</product>";
+        Assert.assertEquals("price XML", expected, productTag.toString());
+    }
 }

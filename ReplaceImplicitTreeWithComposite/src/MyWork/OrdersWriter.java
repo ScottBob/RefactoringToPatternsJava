@@ -60,14 +60,6 @@ public class OrdersWriter {
         priceNode.addAttribute("currency", currencyFor(product));
         priceNode.addValue(product.getPrice());
         xml.append(priceNode.toString());
-        /*
-        xml.append("<price");
-        xml.append(" currency='");
-        xml.append(this.currencyFor(product));
-        xml.append("'>");
-        xml.append(product.getPrice());
-        xml.append("</price>");
-         */
     }
 
     private String currencyFor(Product product) {
