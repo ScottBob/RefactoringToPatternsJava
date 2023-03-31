@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Loan {
-    private static final long MILLIS_PER_DAY = 86400000;
-    private static final long DAYS_PER_YEAR = 365;
     private double commitment = 1.0;
     private final double outstanding = 0;
     private final int riskRating;
@@ -15,6 +13,7 @@ public class Loan {
     private final ZonedDateTime expiry;
     private double unusedPercentage;
     ArrayList<Payment> payments = new ArrayList<>();
+    CapitalStrategy capitalStrategy;
 
     public Loan(double commitment, double notSureWhatThisIs, ZonedDateTime start, ZonedDateTime expiry, ZonedDateTime maturity, int riskRating) {
         this.expiry = expiry;
@@ -23,6 +22,7 @@ public class Loan {
         this.maturity = maturity;
         this.riskRating = riskRating;
         this.unusedPercentage = 1.0;
+        capitalStrategy = new CapitalStrategy();
     }
 
     public static Loan newTermLoan(double commitment, ZonedDateTime start, ZonedDateTime maturity, int riskRating)
@@ -52,7 +52,11 @@ public class Loan {
     }
 
     public double capital() {
-        return new CapitalStrategy().capital(this);
+        return capitalStrategy.capital(this);
+    }
+
+    public double duration() {
+        return capitalStrategy.duration(this);
     }
 
     public double outstandingRiskAmount() {
@@ -65,10 +69,6 @@ public class Loan {
 
     private void setUnusedPercentage(double unusedPercentage) {
         this.unusedPercentage = unusedPercentage;
-    }
-
-    public double duration() {
-        return new CapitalStrategy().duration(this);
     }
 
     public double unusedRiskAmount() {
