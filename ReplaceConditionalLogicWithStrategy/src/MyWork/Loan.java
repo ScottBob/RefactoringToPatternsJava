@@ -68,32 +68,7 @@ public class Loan {
     }
 
     public double duration() {
-        if (expiry == null && maturity != null)
-            return weightedAverageDuration();
-        else if (expiry != null && maturity == null)
-            return yearsTo(expiry);
-        return 0.0;
-    }
-
-    private double weightedAverageDuration() {
-        double duration = 0.0;
-        double weightedAverage = 0.0;
-        double sumOfPayments = 0.0;
-        Iterator loanPayments = payments.iterator();
-        while (loanPayments.hasNext()) {
-            Payment payment = (Payment)loanPayments.next();
-            sumOfPayments += payment.amount();
-            weightedAverage += yearsTo(payment.date()) * payment.amount();
-        }
-        if (commitment != 0.0)
-            duration = weightedAverage / sumOfPayments;
-        return duration;
-    }
-
-    private double yearsTo(ZonedDateTime endDate) {
-        ZonedDateTime today = ZonedDateTime.now();
-        ZonedDateTime beginDate = (start == null ? today : start);
-        return endDate.getYear() - beginDate.getYear();
+        return new CapitalStrategy().duration(this);
     }
 
     public double unusedRiskAmount() {
@@ -114,5 +89,13 @@ public class Loan {
 
     public double getRiskRating() {
         return riskRating;
+    }
+
+    public ArrayList<Payment> getPayments() {
+        return payments;
+    }
+
+    public ZonedDateTime getStart() {
+        return start;
     }
 }
