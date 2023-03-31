@@ -21,40 +21,43 @@ public class OrdersWriter {
             Order order = this.orders.getOrder(i);
             xml.append("<order");
             xml.append(" id='");
-            xml.append(order.orderId());
+            xml.append(order.getOrderId());
             xml.append("'>");
-            for (int j = 0; j < order.productCount(); j++)
-            {
-                Product product = order.Product(j);
-                xml.append("<product");
-                xml.append(" id='");
-                xml.append(product.getId());
-                xml.append("'");
-                xml.append(" color='");
-                xml.append(this.colorFor(product));
-                xml.append("'");
-                if (product.getSize() != ProductSize.NotApplicable)
-                {
-                    xml.append(" size='");
-                    xml.append(this.sizeFor(product));
-                    xml.append("'");
-                }
-
-                xml.append(">");
-                xml.append("<price");
-                xml.append(" currency='");
-                xml.append(this.currencyFor(product));
-                xml.append("'>");
-                xml.append(product.getPrice());
-                xml.append("</price>");
-                xml.append(product.getName());
-                xml.append("</product>");
-            }
+            writeProducts(xml, order);
 
             xml.append("</order>");
         }
 
         xml.append("</orders>");
+    }
+
+    private void writeProducts(StringBuilder xml, Order order) {
+        for (int j = 0; j < order.productCount(); j++) {
+            Product product = order.Product(j);
+            xml.append("<product");
+            xml.append(" id='");
+            xml.append(product.getId());
+            xml.append("'");
+            xml.append(" color='");
+            xml.append(this.colorFor(product));
+            xml.append("'");
+            if (product.getSize() != ProductSize.NotApplicable)
+            {
+                xml.append(" size='");
+                xml.append(this.sizeFor(product));
+                xml.append("'");
+            }
+
+            xml.append(">");
+            xml.append("<price");
+            xml.append(" currency='");
+            xml.append(this.currencyFor(product));
+            xml.append("'>");
+            xml.append(product.getPrice());
+            xml.append("</price>");
+            xml.append(product.getName());
+            xml.append("</product>");
+        }
     }
 
     private String currencyFor(Product product) {

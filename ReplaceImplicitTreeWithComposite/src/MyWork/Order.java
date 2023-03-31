@@ -11,7 +11,7 @@ public class Order {
         this.id = id;
     }
 
-    public int orderId() {
+    public int getOrderId() {
         return this.id;
     }
 
