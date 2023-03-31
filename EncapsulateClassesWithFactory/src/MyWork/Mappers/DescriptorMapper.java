@@ -19,7 +19,7 @@ public class DescriptorMapper {
         result.add(AttributeDescriptor.forDate("createdDate", GetClass()));
         result.add(AttributeDescriptor.forDate("lastChangedDate", GetClass()));
         result.add(AttributeDescriptor.forUser("createdBy", GetClass()));
-        result.add(new ReferenceDescriptor("lastChangedBy", GetClass(), User.class));
+        result.add(AttributeDescriptor.forUser("lastChangedBy", GetClass()));
         result.add(AttributeDescriptor.forInteger("optimisticLockVersion", GetClass()));
         return result;
     }
