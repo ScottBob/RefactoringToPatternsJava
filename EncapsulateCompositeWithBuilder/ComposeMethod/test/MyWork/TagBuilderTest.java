@@ -86,4 +86,20 @@ public class TagBuilderTest {
         String actual = builder.toXml();
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void test_parent_name_not_found() {
+        TagBuilder builder = new TagBuilder("flavors");
+        try {
+            for (int i = 0; i < 2; ++i) {
+                builder.addToParent("favors", "flavor"); // Misspelled "flavors"
+                builder.addChild("requirements");
+                builder.addChild("requirement");
+            }
+            Assert.fail("Should not allow adding to parent that doesn't exist");
+        } catch (RuntimeException runtimeException) {
+            String expectedErrorMessage = "missing parent tag: favors";
+            Assert.assertEquals(expectedErrorMessage, runtimeException.getMessage());
+        }
+    }
 }
