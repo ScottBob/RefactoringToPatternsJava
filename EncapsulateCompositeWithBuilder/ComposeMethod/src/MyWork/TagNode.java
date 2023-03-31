@@ -31,13 +31,18 @@ public class TagNode {
     }
 
     public String toString() {
-        String result = "<" + this.name + this.attributes + ">";
+        String result;
+        if (this.children.isEmpty()) {
+            result = "<" + this.name + this.attributes + "/>";
+        } else {
+            result = "<" + this.name + this.attributes + ">";
 
-        for (TagNode tagNode : this.children) {
-            result += tagNode.toString();
+            for (TagNode tagNode : this.children) {
+                result += tagNode.toString();
+            }
+
+            result += this.value + "</" + this.name + ">";
         }
-
-        result += this.value + "</" + this.name + ">";
         return result;
     }
 }
