@@ -21,8 +21,23 @@ public class TagBuilder {
         addTo(currentNode.getParent(), siblingTagName);
     }
 
+    public void addToParent(String parentTagName, String childTagName) {
+        addTo(findParentBy(parentTagName), childTagName);
+    }
+
     private void addTo(TagNode parentNode, String tagName) {
         currentNode = new TagNode(tagName);
         parentNode.add(currentNode);
+    }
+
+    private TagNode findParentBy(String parentName) {
+        TagNode parentNode = currentNode;
+        while(parentNode != null) {
+            if (parentName.equals(parentNode.getName())) {
+                return parentNode;
+            }
+            parentNode = parentNode.getParent();
+        }
+        return null;
     }
 }
