@@ -24,7 +24,7 @@ public class DescriptorMapper {
         return result;
     }
 
-    public static DefaultDescriptor forInteger(String descriptorName, Type type) {
+    public static AttributeDescriptor forInteger(String descriptorName, Type type) {
         return new DefaultDescriptor(descriptorName, DescriptorMapper.class, Integer.class);
     }
 
