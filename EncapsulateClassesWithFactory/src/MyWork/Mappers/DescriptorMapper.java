@@ -16,12 +16,16 @@ public class DescriptorMapper {
         List<AttributeDescriptor> result = new ArrayList<>();
 
         result.add(AttributeDescriptor.forInteger("remoteId", GetClass()));
-        result.add(new DefaultDescriptor("createdDate", GetClass(), ZonedDateTime.class));
+        result.add(forDate("createdDate", GetClass(), ZonedDateTime.class));
         result.add(new DefaultDescriptor("lastChangedDate", GetClass(), ZonedDateTime.class));
         result.add(new ReferenceDescriptor("createdBy", GetClass(), User.class));
         result.add(new ReferenceDescriptor("lastChangedBy", GetClass(), User.class));
         result.add(AttributeDescriptor.forInteger("optimisticLockVersion", GetClass()));
         return result;
+    }
+
+    private AttributeDescriptor forDate(String descriptorName, Type type, Class<ZonedDateTime> zonedDateTimeClass) {
+        return new DefaultDescriptor(descriptorName, DescriptorMapper.class, ZonedDateTime.class);
     }
 
     private Type GetClass()
