@@ -14,7 +14,10 @@ public class List
         if (atCapacity()) {
             grow();
         }
+        addElement(element);
+    }
 
+    private void addElement(Object element) {
         elements[size++] = element;
     }
 
