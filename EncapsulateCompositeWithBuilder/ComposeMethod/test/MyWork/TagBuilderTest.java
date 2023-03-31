@@ -50,16 +50,16 @@ public class TagBuilderTest {
         Assert.assertEquals("root", childNode.getParent().getName());
     }
 
-//    @Test
-//    public void test_build_sibling() {
-//        String expected = "<flavors>" +
-//                             "<flavor1/>" +
-//                             "<flavor2/>" +
-//                          "</flavors>";
-//        TagBuilder builder = new TagBuilder("flavors");
-//        builder.addChild("flavor1");
-//        builder.addSibling("flavor2");
-//        String actual = builder.toXml();
-//        Assert.assertEquals(expected, actual);
-//    }
+    @Test
+    public void test_build_sibling() {
+        String expected = "<flavors>" +
+                             "<flavor1/>" +
+                             "<flavor2/>" +
+                          "</flavors>";
+        TagBuilder builder = new TagBuilder("flavors");
+        builder.addChild("flavor1");
+        builder.addSibling("flavor2");
+        String actual = builder.toXml();
+        Assert.assertEquals(expected, actual);
+    }
 }
