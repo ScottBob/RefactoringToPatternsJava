@@ -18,13 +18,13 @@ public class DescriptorMapper {
         result.add(AttributeDescriptor.forInteger("remoteId", GetClass()));
         result.add(AttributeDescriptor.forDate("createdDate", GetClass()));
         result.add(AttributeDescriptor.forDate("lastChangedDate", GetClass()));
-        result.add(forUser("createdBy", GetClass(), User.class));
+        result.add(forUser("createdBy", GetClass()));
         result.add(new ReferenceDescriptor("lastChangedBy", GetClass(), User.class));
         result.add(AttributeDescriptor.forInteger("optimisticLockVersion", GetClass()));
         return result;
     }
 
-    public static AttributeDescriptor forUser(String descriptorName, Type type, Class<User> userClass) {
+    public static AttributeDescriptor forUser(String descriptorName, Type type) {
         return new ReferenceDescriptor(descriptorName, DescriptorMapper.class, User.class);
     }
 
