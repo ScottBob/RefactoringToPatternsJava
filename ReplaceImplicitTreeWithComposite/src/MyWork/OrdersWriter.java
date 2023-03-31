@@ -10,6 +10,11 @@ public class OrdersWriter {
     public String getContents()
     {
         StringBuilder xml = new StringBuilder();
+        writeOrderTo(xml);
+        return xml.toString();
+    }
+
+    private void writeOrderTo(StringBuilder xml) {
         xml.append("<orders>");
         for (int i = 0; i < this.orders.orderCount(); i++)
         {
@@ -50,7 +55,6 @@ public class OrdersWriter {
         }
 
         xml.append("</orders>");
-        return xml.toString();
     }
 
     private String currencyFor(Product product) {
