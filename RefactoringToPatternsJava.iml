@@ -9,6 +9,8 @@
       <sourceFolder url="file://$MODULE_DIR$/EncapsulateCompositeWithBuilder/ComposeMethod/test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/ReplaceConditionalLogicWithStrategy/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ReplaceConditionalLogicWithStrategy/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/ReplaceImplicitTreeWithComposite/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ReplaceImplicitTreeWithComposite/test" isTestSource="true" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

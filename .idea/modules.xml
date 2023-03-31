@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ChainConstructors/ChainConstructors.iml" filepath="$PROJECT_DIR$/ChainConstructors/ChainConstructors.iml" />
       <module fileurl="file://$PROJECT_DIR$/EncapsulateClassesWithFactory/EncapsulateClassesWithFactory.iml" filepath="$PROJECT_DIR$/EncapsulateClassesWithFactory/EncapsulateClassesWithFactory.iml" />
       <module fileurl="file://$PROJECT_DIR$/PolymorphicCreationWithFactoryMethod/PolymorphicCreationWithFactoryMethod.iml" filepath="$PROJECT_DIR$/PolymorphicCreationWithFactoryMethod/PolymorphicCreationWithFactoryMethod.iml" />
       <module fileurl="file://$PROJECT_DIR$/RefactoringToPatternsJava.iml" filepath="$PROJECT_DIR$/RefactoringToPatternsJava.iml" />
       <module fileurl="file://$PROJECT_DIR$/ReplaceConstructorsWithCreationMethods/ReplaceConditionalLogicWithStrategy.iml" filepath="$PROJECT_DIR$/ReplaceConstructorsWithCreationMethods/ReplaceConditionalLogicWithStrategy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ChainConstructors/ReplaceImplicitTreeWithComposite.iml" filepath="$PROJECT_DIR$/ChainConstructors/ReplaceImplicitTreeWithComposite.iml" />
     </modules>
   </component>
 </project>
