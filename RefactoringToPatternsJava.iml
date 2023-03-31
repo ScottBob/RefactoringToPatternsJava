@@ -2,7 +2,14 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/ComposeMethod/ComposeMethod/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ComposeMethod/ComposeMethod/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/EncapsulateCompositeWithBuilder/ComposeMethod/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/EncapsulateCompositeWithBuilder/ComposeMethod/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/ReplaceConditionalLogicWithStrategy/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ReplaceConditionalLogicWithStrategy/test" isTestSource="true" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="hamcrest-core-1.3" level="project" />
