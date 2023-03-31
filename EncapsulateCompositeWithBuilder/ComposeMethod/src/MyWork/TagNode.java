@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TagNode {
+    private TagNode parent;
     private StringBuilder attributes;
     private List<TagNode> children = new ArrayList<>();
     private String name;
@@ -14,8 +15,21 @@ public class TagNode {
         this.attributes = new StringBuilder();
     }
 
-    public void add(TagNode tagNode) {
-        this.children.add(tagNode);
+    private void setParent(TagNode parent) {
+        this.parent = parent;
+    }
+
+    public TagNode getParent() {
+        return parent;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void add(TagNode childNode) {
+        childNode.setParent(this);
+        this.children.add(childNode);
     }
 
     public void addAttribute(String attribute, String value) {
