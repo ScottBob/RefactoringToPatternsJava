@@ -28,7 +28,7 @@ public class Loan {
     public static Loan newTermLoan(double commitment, ZonedDateTime start, ZonedDateTime maturity, int riskRating)
     {
         return new Loan(commitment, commitment, start, null,
-                maturity, riskRating, new CapitalStrategy());
+                maturity, riskRating, new CapitalStrategyTermLoan());
     }
 
     public static Loan newRevolver(double commitment, ZonedDateTime start, ZonedDateTime expiry, int riskRating)
