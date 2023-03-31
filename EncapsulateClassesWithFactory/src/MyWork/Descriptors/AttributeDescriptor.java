@@ -1,5 +1,6 @@
 package MyWork.Descriptors;
 
+import MyWork.Domain.User;
 import MyWork.Mappers.DescriptorMapper;
 
 import java.lang.reflect.Type;
@@ -23,5 +24,9 @@ public class AttributeDescriptor {
 
     public static AttributeDescriptor forInteger(String descriptorName, Type type) {
         return new DefaultDescriptor(descriptorName, DescriptorMapper.class, Integer.class);
+    }
+
+    public static AttributeDescriptor forUser(String descriptorName, Type type) {
+        return new ReferenceDescriptor(descriptorName, DescriptorMapper.class, User.class);
     }
 }
