@@ -20,7 +20,7 @@ public class DescriptorMapper {
         result.add(new DefaultDescriptor("lastChangedDate", GetClass(), ZonedDateTime.class));
         result.add(new ReferenceDescriptor("createdBy", GetClass(), User.class));
         result.add(new ReferenceDescriptor("lastChangedBy", GetClass(), User.class));
-        result.add(new DefaultDescriptor("optimisticLockVersion", GetClass(), int.class));
+        result.add(AttributeDescriptor.forInteger("optimisticLockVersion", GetClass()));
         return result;
     }
 
