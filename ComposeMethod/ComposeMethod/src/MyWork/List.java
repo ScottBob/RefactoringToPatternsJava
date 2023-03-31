@@ -11,9 +11,7 @@ public class List
         if (readOnly) {
             return;
         }
-        int newSize = size + 1;
-
-        if(newSize > elements.length) {
+        if (atCapacity()) {
             Object[] newElements = new Object[elements.length + GROWTH_INCREMENT];
 
             for (int i = 0; i < size; i++)
@@ -23,6 +21,10 @@ public class List
         }
 
         elements[size++] = element;
+    }
+
+    private boolean atCapacity() {
+        return (size + 1) > elements.length;
     }
 
     public int getCount() {
