@@ -52,6 +52,8 @@ public class Loan {
     }
 
     public double capital() {
+        CapitalStrategy capitalStrategy = new CapitalStrategy();
+        return capitalStrategy.capital();
         if (expiry == null && maturity !=null) {
             return commitment * duration() * riskFactor();
         }
@@ -66,11 +68,11 @@ public class Loan {
         return 0.0;
     }
 
-    private double outstandingRiskAmount() {
+    public double outstandingRiskAmount() {
         return outstanding;
     }
 
-    private double getUnusedPercentage() {
+    public double getUnusedPercentage() {
         return unusedPercentage;
     }
 
@@ -107,15 +109,23 @@ public class Loan {
         return endDate.getYear() - beginDate.getYear();
     }
 
-    private double riskFactor() {
-        return RiskFactor.getFactors().forRating(riskRating);
-    }
-
-    private double unusedRiskFactor() {
-        return UnusedRiskFactors.getFactors().forRating(riskRating);
-    }
-
-    private double unusedRiskAmount() {
+    public double unusedRiskAmount() {
         return (commitment - outstanding);
+    }
+
+    public ZonedDateTime getExpiry() {
+        return expiry;
+    }
+
+    public ZonedDateTime getMaturity() {
+        return maturity;
+    }
+
+    public double getCommitment() {
+        return commitment;
+    }
+
+    public double getRiskRating() {
+        return riskRating;
     }
 }
