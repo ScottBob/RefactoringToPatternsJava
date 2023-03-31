@@ -23,7 +23,7 @@ public class OrdersWriter {
             xml.append(" id='");
             xml.append(order.getOrderId());
             xml.append("'>");
-            writeProducts(xml, order);
+            writeProductsTo(xml, order);
 
             xml.append("</order>");
         }
@@ -31,7 +31,7 @@ public class OrdersWriter {
         xml.append("</orders>");
     }
 
-    private void writeProducts(StringBuilder xml, Order order) {
+    private void writeProductsTo(StringBuilder xml, Order order) {
         for (int j = 0; j < order.productCount(); j++) {
             Product product = order.Product(j);
             xml.append("<product");
@@ -49,15 +49,19 @@ public class OrdersWriter {
             }
 
             xml.append(">");
-            xml.append("<price");
-            xml.append(" currency='");
-            xml.append(this.currencyFor(product));
-            xml.append("'>");
-            xml.append(product.getPrice());
-            xml.append("</price>");
+            writePriceTo(xml, product);
             xml.append(product.getName());
             xml.append("</product>");
         }
+    }
+
+    private void writePriceTo(StringBuilder xml, Product product) {
+        xml.append("<price");
+        xml.append(" currency='");
+        xml.append(this.currencyFor(product));
+        xml.append("'>");
+        xml.append(product.getPrice());
+        xml.append("</price>");
     }
 
     private String currencyFor(Product product) {
