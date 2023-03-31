@@ -3,41 +3,41 @@ package MyWork;
 import java.time.ZonedDateTime;
 
 public class Loan {
-    private final CapitalStrategy _strategy;
-    private float _notional;
-    private float _outstanding;
-    private int _rating;
-    private ZonedDateTime _expiry;
-    private ZonedDateTime _maturity;
+    private final CapitalStrategy strategy;
+    private float notional;
+    private float outstanding;
+    private int rating;
+    private ZonedDateTime expiry;
+    private ZonedDateTime maturity;
 
     public Loan(float notional, float outstanding, int rating, ZonedDateTime expiry) {
-        this._strategy = new TermROC();
-        this._notional = notional;
-        this._outstanding = outstanding;
-        this._rating = rating;
-        this._expiry = expiry;
+        this.strategy = new TermROC();
+        this.notional = notional;
+        this.outstanding = outstanding;
+        this.rating = rating;
+        this.expiry = expiry;
     }
 
     public Loan(float notional, float outstanding, int rating, ZonedDateTime expiry, ZonedDateTime maturity) {
-        this._strategy = new RevolvingTermROC();
-        this._notional = notional;
-        this._outstanding = outstanding;
-        this._rating = rating;
-        this._expiry = expiry;
-        this._maturity = maturity;
+        this.strategy = new RevolvingTermROC();
+        this.notional = notional;
+        this.outstanding = outstanding;
+        this.rating = rating;
+        this.expiry = expiry;
+        this.maturity = maturity;
     }
 
     public Loan(CapitalStrategy strategy, float notional, float outstanding,
                 int rating, ZonedDateTime expiry, ZonedDateTime maturity) {
-        this._strategy = strategy;
-        this._notional = notional;
-        this._outstanding = outstanding;
-        this._rating = rating;
-        this._expiry = expiry;
-        this._maturity = maturity;
+        this.strategy = strategy;
+        this.notional = notional;
+        this.outstanding = outstanding;
+        this.rating = rating;
+        this.expiry = expiry;
+        this.maturity = maturity;
     }
 
     public CapitalStrategy GetCapitalStrategy() {
-        return _strategy;
+        return strategy;
     }
 }
