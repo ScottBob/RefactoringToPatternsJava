@@ -1,18 +1,13 @@
 package Initial;
 
-import MyWork.Order;
-import MyWork.Orders;
-import MyWork.Product;
-import MyWork.ProductSize;
-
 public class OrdersWriter {
-    private MyWork.Orders orders;
+    private Orders orders;
 
     public OrdersWriter(Orders orders) {
         this.orders = orders;
     }
 
-    public String GetContents()
+    public String getContents()
     {
         StringBuilder xml = new StringBuilder();
         xml.append("<orders>");

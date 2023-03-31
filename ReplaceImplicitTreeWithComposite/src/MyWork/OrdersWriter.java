@@ -7,7 +7,7 @@ public class OrdersWriter {
         this.orders = orders;
     }
 
-    public String GetContents()
+    public String getContents()
     {
         StringBuilder xml = new StringBuilder();
         xml.append("<orders>");

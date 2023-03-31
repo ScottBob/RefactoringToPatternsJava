@@ -1,7 +1,5 @@
 package Initial;
 
-import MyWork.Product;
-
 import java.util.ArrayList;
 
 public class Order {

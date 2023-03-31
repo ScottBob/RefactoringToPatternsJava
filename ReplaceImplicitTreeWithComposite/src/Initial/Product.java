@@ -1,7 +1,5 @@
 package Initial;
 
-import MyWork.ProductSize;
-
 public class Product {
     private int id;
     private String name;

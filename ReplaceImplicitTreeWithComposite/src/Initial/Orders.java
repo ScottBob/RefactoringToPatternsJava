@@ -1,17 +1,15 @@
 package Initial;
 
-import MyWork.Order;
-
 import java.util.ArrayList;
 
 public class Orders {
-    private ArrayList<MyWork.Order> orders;
+    private ArrayList<Order> orders;
 
     public Orders() {
         this.orders = new ArrayList<>();
     }
 
-    public void add(MyWork.Order order) {
+    public void add(Order order) {
         this.orders.add(order);
     }
 
