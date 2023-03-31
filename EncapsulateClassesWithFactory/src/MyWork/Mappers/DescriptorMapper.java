@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DescriptorMapper {
-    protected List<AttributeDescriptor> CreateAttributeDescriptors() {
+    protected List<AttributeDescriptor> createAttributeDescriptors() {
         List<AttributeDescriptor> result = new ArrayList<>();
 
         result.add(new DefaultDescriptor("remoteId", GetClass(), int.class));

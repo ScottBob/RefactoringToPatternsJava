@@ -79,7 +79,7 @@ public class DescriptorMapperTests {
         List<AttributeDescriptor> descriptors;
 
         public TestingDescriptorMapper() {
-            descriptors = CreateAttributeDescriptors();
+            descriptors = createAttributeDescriptors();
         }
 
         public AttributeDescriptor GetMappedDescriptorFor(String descriptorName) {
