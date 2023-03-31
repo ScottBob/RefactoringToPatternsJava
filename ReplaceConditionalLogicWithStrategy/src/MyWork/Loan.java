@@ -41,7 +41,7 @@ public class Loan {
     {
         if (riskRating > 3) return null;
         Loan advisedLine = new Loan(commitment, 0, start, expiry,
-                null, riskRating, new CapitalStrategy());
+                null, riskRating, new CapitalStrategyAdvisedLine());
         advisedLine.setUnusedPercentage(0.1);
         return advisedLine;
     }
