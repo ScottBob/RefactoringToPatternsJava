@@ -17,7 +17,7 @@ public class DescriptorMapper {
 
         result.add(AttributeDescriptor.forInteger("remoteId", GetClass()));
         result.add(AttributeDescriptor.forDate("createdDate", GetClass()));
-        result.add(new DefaultDescriptor("lastChangedDate", GetClass(), ZonedDateTime.class));
+        result.add(AttributeDescriptor.forDate("lastChangedDate", GetClass()));
         result.add(new ReferenceDescriptor("createdBy", GetClass(), User.class));
         result.add(new ReferenceDescriptor("lastChangedBy", GetClass(), User.class));
         result.add(AttributeDescriptor.forInteger("optimisticLockVersion", GetClass()));
