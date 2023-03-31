@@ -79,7 +79,7 @@ public class TagBuilderTest {
                 "</flavors>";
         TagBuilder builder = new TagBuilder("flavors");
         for (int i = 0; i < 2; ++i) {
-            builder.addChild("flavor");
+            builder.addtoParent("flavors", "flavor");
             builder.addChild("requirements");
             builder.addChild("requirement");
         }
