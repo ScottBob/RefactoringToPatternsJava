@@ -15,33 +15,33 @@ public class Loan {
     ArrayList<Payment> payments = new ArrayList<>();
     CapitalStrategy capitalStrategy;
 
-    public Loan(double commitment, double notSureWhatThisIs, ZonedDateTime start, ZonedDateTime expiry, ZonedDateTime maturity, int riskRating) {
+    public Loan(double commitment, double notSureWhatThisIs, ZonedDateTime start, ZonedDateTime expiry, ZonedDateTime maturity, int riskRating, CapitalStrategy capitalStrategy) {
         this.expiry = expiry;
         this.commitment = commitment;
         this.start = start;
         this.maturity = maturity;
         this.riskRating = riskRating;
         this.unusedPercentage = 1.0;
-        capitalStrategy = new CapitalStrategy();
+        this.capitalStrategy = capitalStrategy;
     }
 
     public static Loan newTermLoan(double commitment, ZonedDateTime start, ZonedDateTime maturity, int riskRating)
     {
         return new Loan(commitment, commitment, start, null,
-                maturity, riskRating);
+                maturity, riskRating, new CapitalStrategy());
     }
 
     public static Loan newRevolver(double commitment, ZonedDateTime start, ZonedDateTime expiry, int riskRating)
     {
         return new Loan(commitment, 0, start, expiry,
-                null, riskRating);
+                null, riskRating, new CapitalStrategy());
     }
 
     public static Loan newAdvisedLine(double commitment, ZonedDateTime start, ZonedDateTime expiry, int riskRating)
     {
         if (riskRating > 3) return null;
         Loan advisedLine = new Loan(commitment, 0, start, expiry,
-                null, riskRating);
+                null, riskRating, new CapitalStrategy());
         advisedLine.setUnusedPercentage(0.1);
         return advisedLine;
     }
