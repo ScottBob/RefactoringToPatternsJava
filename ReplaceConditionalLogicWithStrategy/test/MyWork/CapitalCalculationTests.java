@@ -32,6 +32,30 @@ public class CapitalCalculationTests {
         Assert.assertEquals("capital", 210.0, termLoan.capital(), TWO_DIGIT_PRECISION);
     }
 
+    @Test
+    public void test_revolving_loan_same_payments() {
+        ZonedDateTime start = november(20, 2003);
+        ZonedDateTime maturity = november(20, 2006);
+        Loan termLoan = Loan.newRevolver(LOAN_AMOUNT, start, maturity, HIGH_RISK_RATING);
+        termLoan.payment(1000.00, november(20, 2004));
+        termLoan.payment(1000.00, november(20, 2005));
+        termLoan.payment(1000.00, november(20, 2006));
+        Assert.assertEquals("duration", 3.0, termLoan.duration(), TWO_DIGIT_PRECISION);
+        Assert.assertEquals("capital", 90.0, termLoan.capital(), TWO_DIGIT_PRECISION);
+    }
+
+    @Test
+    public void test_advised_loan_same_payments() {
+        ZonedDateTime start = november(20, 2003);
+        ZonedDateTime maturity = november(20, 2006);
+        Loan termLoan = Loan.newAdvisedLine(LOAN_AMOUNT, start, maturity, HIGH_RISK_RATING);
+        termLoan.payment(1000.00, november(20, 2004));
+        termLoan.payment(1000.00, november(20, 2005));
+        termLoan.payment(1000.00, november(20, 2006));
+        Assert.assertEquals("duration", 3.0, termLoan.duration(), TWO_DIGIT_PRECISION);
+        Assert.assertEquals("capital", 31.5, termLoan.capital(), TWO_DIGIT_PRECISION);
+    }
+
     /*
     @Test
     public void test_term_loan_no_payments() {
