@@ -52,20 +52,7 @@ public class Loan {
     }
 
     public double capital() {
-        CapitalStrategy capitalStrategy = new CapitalStrategy();
-        return capitalStrategy.capital();
-        if (expiry == null && maturity !=null) {
-            return commitment * duration() * riskFactor();
-        }
-        if (expiry != null && maturity == null) {
-            if (getUnusedPercentage() != 1.0) {
-                return commitment * getUnusedPercentage() * duration() * riskFactor();
-            } else {
-                return (outstandingRiskAmount() * duration() * riskFactor())
-                        + (unusedRiskAmount() * duration() * unusedRiskFactor());
-            }
-        }
-        return 0.0;
+        return new CapitalStrategy().capital(this);
     }
 
     public double outstandingRiskAmount() {
