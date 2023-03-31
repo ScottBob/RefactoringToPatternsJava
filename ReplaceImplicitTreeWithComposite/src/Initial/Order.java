@@ -23,7 +23,7 @@ public class Order {
         return this.products.size();
     }
 
-    public Product Product(int insertionIndex) {
+    public Product getProduct(int insertionIndex) {
         return this.products.get(insertionIndex);
     }
 }

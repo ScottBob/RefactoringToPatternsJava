@@ -20,7 +20,7 @@ public class OrdersWriter {
             xml.append("'>");
             for (int j = 0; j < order.productCount(); j++)
             {
-                Product product = order.Product(j);
+                Product product = order.getProduct(j);
                 xml.append("<product");
                 xml.append(" id='");
                 xml.append(product.getId());

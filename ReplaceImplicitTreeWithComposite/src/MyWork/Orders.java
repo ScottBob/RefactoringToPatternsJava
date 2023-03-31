@@ -17,7 +17,7 @@ public class Orders {
         return this.orders.size();
     }
 
-    public Order order(int insertionIndex) {
+    public Order getOrder(int insertionIndex) {
         return this.orders.get(insertionIndex);
     }
 }

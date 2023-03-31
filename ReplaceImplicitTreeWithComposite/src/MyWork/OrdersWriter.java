@@ -13,7 +13,7 @@ public class OrdersWriter {
         xml.append("<orders>");
         for (int i = 0; i < this.orders.orderCount(); i++)
         {
-            Order order = this.orders.order(i);
+            Order order = this.orders.getOrder(i);
             xml.append("<order");
             xml.append(" id='");
             xml.append(order.orderId());
