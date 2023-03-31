@@ -7,6 +7,9 @@ public class List
     private Object[] elements = new Object[]{};
 
     public void add(Object element) {
+        if (readOnly) {
+            return;
+        }
         if(!readOnly) {
             int newSize = size + 1;
 
