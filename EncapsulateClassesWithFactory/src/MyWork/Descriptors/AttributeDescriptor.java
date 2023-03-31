@@ -19,14 +19,14 @@ public class AttributeDescriptor {
     }
 
     public static AttributeDescriptor forDate(String descriptorName, Type type) {
-        return new DefaultDescriptor(descriptorName, DescriptorMapper.class, ZonedDateTime.class);
+        return new DefaultDescriptor(descriptorName, type, ZonedDateTime.class);
     }
 
     public static AttributeDescriptor forInteger(String descriptorName, Type type) {
-        return new DefaultDescriptor(descriptorName, DescriptorMapper.class, Integer.class);
+        return new DefaultDescriptor(descriptorName, type, Integer.class);
     }
 
     public static AttributeDescriptor forUser(String descriptorName, Type type) {
-        return new ReferenceDescriptor(descriptorName, DescriptorMapper.class, User.class);
+        return new ReferenceDescriptor(descriptorName, type, User.class);
     }
 }
