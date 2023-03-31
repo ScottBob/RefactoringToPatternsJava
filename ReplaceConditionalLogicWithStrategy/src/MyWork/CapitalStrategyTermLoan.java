@@ -26,14 +26,4 @@ public class CapitalStrategyTermLoan extends CapitalStrategy {
             duration = weightedAverage / sumOfPayments;
         return duration;
     }
-
-    private double yearsTo(ZonedDateTime endDate, Loan loan) {
-        ZonedDateTime today = ZonedDateTime.now();
-        ZonedDateTime beginDate = (loan.getStart() == null ? today : loan.getStart());
-        return endDate.getYear() - beginDate.getYear();
-    }
-
-    private double riskFactorFor(Loan loan) {
-        return RiskFactor.getFactors().forRating(loan.getRiskRating());
-    }
 }

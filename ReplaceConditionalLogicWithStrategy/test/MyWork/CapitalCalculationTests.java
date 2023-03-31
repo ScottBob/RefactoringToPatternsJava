@@ -17,7 +17,6 @@ public class CapitalCalculationTests {
 
     private final double Commitment = 3.0;
     private final double Outstanding = 12.9;
-    private RiskAdjustedCapitalStrategy riskAdjustedCapitalStrategy = new RiskAdjustedCapitalStrategy();
     private final int RiskRating = 5;
 
     @Test
