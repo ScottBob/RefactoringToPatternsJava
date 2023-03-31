@@ -53,12 +53,36 @@ public class TagBuilderTest {
     @Test
     public void test_build_sibling() {
         String expected = "<flavors>" +
-                             "<flavor1/>" +
-                             "<flavor2/>" +
-                          "</flavors>";
+                "<flavor1/>" +
+                "<flavor2/>" +
+                "</flavors>";
         TagBuilder builder = new TagBuilder("flavors");
         builder.addChild("flavor1");
         builder.addSibling("flavor2");
+        String actual = builder.toXml();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void test_repeating_children_and_grandchildren() {
+        String expected = "<flavors>" +
+                "<flavor>" +
+                "<requirements>" +
+                "<requirement/>" +
+                "</requirements>" +
+                "</flavor>" +
+                "<flavor>" +
+                "<requirements>" +
+                "<requirement/>" +
+                "</requirements>" +
+                "</flavor>" +
+                "</flavors>";
+        TagBuilder builder = new TagBuilder("flavors");
+        for (int i = 0; i < 2; ++i) {
+            builder.addChild("flavor");
+            builder.addChild("requirements");
+            builder.addChild("requirement");
+        }
         String actual = builder.toXml();
         Assert.assertEquals(expected, actual);
     }
