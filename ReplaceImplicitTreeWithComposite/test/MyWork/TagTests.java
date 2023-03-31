@@ -17,7 +17,7 @@ public class TagTests {
     @Test
     public void test_composite_tag_one_child() {
         TagNode productTag = new TagNode("product");
-        productTag.addValue(new TagNode("price"));
+        productTag.add(new TagNode("price"));
         String expected = "<product>" + "<price>" + "</price>" + "</product>";
         Assert.assertEquals("price XML", expected, productTag.toString());
     }
