@@ -12,16 +12,24 @@ public class NewWorkshopHandler {
     }
 
     public HandlerResponse getNewWorkshopResponse(Map parameters) {
+        createNewWorkshop(parameters);
+        return catalogApp.executeActionAndGetResponse(ALL_WORKSHOPS, parameters);
+    }
+
+    private void createNewWorkshop(Map parameters) {
         String nextWorkshopID = workshopManager().getNextWorkshopID();
+        workshopManager().addWorkshop(newWorkshopContents(nextWorkshopID));
+        parameters.put("id",nextWorkshopID);
+    }
+
+    private StringBuffer newWorkshopContents(String nextWorkshopID) {
         StringBuffer newWorkshopContents =
                 workshopManager().createNewFileFromTemplate(
                         nextWorkshopID,
                         workshopManager().getWorkshopDir(),
                         workshopManager().getWorkshopTemplate()
                 );
-        workshopManager().addWorkshop(newWorkshopContents);
-        parameters.put("id",nextWorkshopID);
-        return catalogApp.executeActionAndGetResponse(ALL_WORKSHOPS, parameters);
+        return newWorkshopContents;
     }
 
     private WorkshopManager workshopManager() {
