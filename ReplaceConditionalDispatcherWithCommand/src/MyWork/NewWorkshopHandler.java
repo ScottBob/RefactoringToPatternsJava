@@ -11,7 +11,7 @@ public class NewWorkshopHandler {
         this.catalogApp = catalogApp;
     }
 
-    public HandlerResponse getNewWorkshopResponse(Map parameters) {
+    public HandlerResponse execute(Map parameters) {
         createNewWorkshop(parameters);
         return catalogApp.executeActionAndGetResponse(ALL_WORKSHOPS, parameters);
     }

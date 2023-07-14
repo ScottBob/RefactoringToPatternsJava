@@ -1,7 +1,6 @@
 package MyWork;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class CatalogApp {
@@ -11,9 +10,9 @@ public class CatalogApp {
 
     HandlerResponse executeActionAndGetResponse(String actionName, Map parameters) {
         if (actionName.equals(NEW_WORKSHOP)) {
-            return new NewWorkshopHandler(this).getNewWorkshopResponse(parameters);
+            return new NewWorkshopHandler(this).execute(parameters);
         } else if (actionName.equals(ALL_WORKSHOPS)) {
-            return new AllWorkshopsHandler(this).getAllWorkshopsResponse();
+            return new AllWorkshopsHandler(this).execute();
         } // ...many more "else if" statements
         return new HandlerResponse(new StringBuffer(workshopManager.toString()), "General Style");
     }

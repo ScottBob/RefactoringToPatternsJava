@@ -11,7 +11,7 @@ public class AllWorkshopsHandler {
         this.catalogApp = catalogApp;
     }
 
-    public HandlerResponse getAllWorkshopsResponse() {
+    public HandlerResponse execute() {
         return new HandlerResponse(
                 new StringBuffer(prettyPrint(allWorkshopsData())),
                 ALL_WORKSHOPS_STYLESHEET);
