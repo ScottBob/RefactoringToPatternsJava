@@ -21,7 +21,7 @@ public class CatalogApp {
                     );
             workshopManager.addWorkshop(newWorkshopContents);
             parameters.put("id",nextWorkshopID);
-            executeActionAndGetResponse(ALL_WORKSHOPS, parameters);
+            return executeActionAndGetResponse(ALL_WORKSHOPS, parameters);
         } else if (actionName.equals(ALL_WORKSHOPS)) {
             XMLBuilder allWorkshopsXml = new XMLBuilder("workshops");
             WorkshopRepository repository =
