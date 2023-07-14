@@ -5,8 +5,6 @@ import java.util.Map;
 import static MyWork.CatalogApp.ALL_WORKSHOPS;
 
 public class NewWorkshopHandler extends Handler {
-    private CatalogApp catalogApp;
-
     public NewWorkshopHandler(CatalogApp catalogApp) {
         super(catalogApp);
     }

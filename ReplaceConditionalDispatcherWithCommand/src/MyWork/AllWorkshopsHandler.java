@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class AllWorkshopsHandler extends Handler {
-    private CatalogApp catalogApp;
     public static final String ALL_WORKSHOPS_STYLESHEET = "All workshops stylesheet";
     private PrettyPrinter prettyPrinter = new PrettyPrinter();
 
