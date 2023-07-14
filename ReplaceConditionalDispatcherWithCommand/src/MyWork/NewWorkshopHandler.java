@@ -4,11 +4,11 @@ import java.util.Map;
 
 import static MyWork.CatalogApp.ALL_WORKSHOPS;
 
-public class NewWorkshopHandler {
+public class NewWorkshopHandler extends Handler {
     private CatalogApp catalogApp;
 
     public NewWorkshopHandler(CatalogApp catalogApp) {
-        this.catalogApp = catalogApp;
+        super(catalogApp);
     }
 
     public HandlerResponse execute(Map parameters) {
