@@ -1,17 +1,18 @@
 package MyWork;
 
 import java.util.Iterator;
+import java.util.Map;
 
-public class AllWorkshopsHandler {
+public class AllWorkshopsHandler extends Handler {
     private CatalogApp catalogApp;
     public static final String ALL_WORKSHOPS_STYLESHEET = "All workshops stylesheet";
     private PrettyPrinter prettyPrinter = new PrettyPrinter();
 
     public AllWorkshopsHandler(CatalogApp catalogApp) {
-        this.catalogApp = catalogApp;
+        super(catalogApp);
     }
 
-    public HandlerResponse execute() {
+    public HandlerResponse execute(Map parameters) {
         return new HandlerResponse(
                 new StringBuffer(prettyPrint(allWorkshopsData())),
                 ALL_WORKSHOPS_STYLESHEET);

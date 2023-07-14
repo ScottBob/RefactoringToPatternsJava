@@ -12,7 +12,7 @@ public class CatalogApp {
         if (actionName.equals(NEW_WORKSHOP)) {
             return new NewWorkshopHandler(this).execute(parameters);
         } else if (actionName.equals(ALL_WORKSHOPS)) {
-            return new AllWorkshopsHandler(this).execute();
+            return new AllWorkshopsHandler(this).execute(parameters);
         } // ...many more "else if" statements
         return new HandlerResponse(new StringBuffer(workshopManager.toString()), "General Style");
     }
