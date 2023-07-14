@@ -10,9 +10,9 @@ public class CatalogApp {
     public static final String ALL_WORKSHOPS_STYLESHEET = "All workshops stylesheet";
     WorkshopManager workshopManager = new WorkshopManager(new WorkshopRepository());
 
-    private HandlerResponse executeActionAndGetResponse(String actionName, Map parameters) {
+    HandlerResponse executeActionAndGetResponse(String actionName, Map parameters) {
         if (actionName.equals(NEW_WORKSHOP)) {
-            return getNewWorkshopResponse(parameters);
+            return new NewWorkshopHandler(this).getNewWorkshopResponse(parameters);
         } else if (actionName.equals(ALL_WORKSHOPS)) {
             return getAllWorkshopsResponse();
         } // ...many more "else if" statements
@@ -41,19 +41,6 @@ public class CatalogApp {
         );
     }
 
-    private HandlerResponse getNewWorkshopResponse(Map parameters) {
-        String nextWorkshopID = workshopManager.getNextWorkshopID();
-        StringBuffer newWorkshopContents =
-                workshopManager.createNewFileFromTemplate(
-                        nextWorkshopID,
-                        workshopManager.getWorkshopDir(),
-                        workshopManager.getWorkshopTemplate()
-                );
-        workshopManager.addWorkshop(newWorkshopContents);
-        parameters.put("id",nextWorkshopID);
-        return executeActionAndGetResponse(ALL_WORKSHOPS, parameters);
-    }
-
     private String getFormattedData(String xmlString) {
         return xmlString;
     }
@@ -61,5 +48,9 @@ public class CatalogApp {
     public HandlerResponse runTheExecuteActionAndGetResponseFunctionForTesting(String actionName) {
         HashMap<String, String> params = new HashMap<>();
         return executeActionAndGetResponse(actionName, params);
+    }
+
+    public WorkshopManager getWorkshopManager() {
+        return workshopManager;
     }
 }
