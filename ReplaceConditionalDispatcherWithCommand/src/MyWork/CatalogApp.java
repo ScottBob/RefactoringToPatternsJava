@@ -14,27 +14,31 @@ public class CatalogApp {
         if (actionName.equals(NEW_WORKSHOP)) {
             return getNewWorkshopResponse(parameters);
         } else if (actionName.equals(ALL_WORKSHOPS)) {
-            XMLBuilder allWorkshopsXml = new XMLBuilder("workshops");
-            WorkshopRepository repository =
-                    workshopManager.getWorkshopRepository();
-            Iterator ids = repository.keyIterator();
-            while (ids.hasNext()) {
-                String id = (String)ids.next();
-                Workshop workshop = repository.getWorkshop(id);
-                allWorkshopsXml.addBelowParent("workshop");
-                allWorkshopsXml.addAttribute("id", workshop.getID());
-                allWorkshopsXml.addAttribute("name", workshop.getName());
-                allWorkshopsXml.addAttribute("status", workshop.getStatus());
-                allWorkshopsXml.addAttribute("duration",
-                        workshop.getDurationAsString());
-            }
-            String formattedXml = getFormattedData(allWorkshopsXml.toString());
-            return new HandlerResponse(
-                    new StringBuffer(formattedXml),
-                    ALL_WORKSHOPS_STYLESHEET
-            );
+            return getAllWorkshopsResponse();
         } // ...many more "else if" statements
         return new HandlerResponse(new StringBuffer(workshopManager.toString()), "General Style");
+    }
+
+    private HandlerResponse getAllWorkshopsResponse() {
+        XMLBuilder allWorkshopsXml = new XMLBuilder("workshops");
+        WorkshopRepository repository =
+                workshopManager.getWorkshopRepository();
+        Iterator ids = repository.keyIterator();
+        while (ids.hasNext()) {
+            String id = (String)ids.next();
+            Workshop workshop = repository.getWorkshop(id);
+            allWorkshopsXml.addBelowParent("workshop");
+            allWorkshopsXml.addAttribute("id", workshop.getID());
+            allWorkshopsXml.addAttribute("name", workshop.getName());
+            allWorkshopsXml.addAttribute("status", workshop.getStatus());
+            allWorkshopsXml.addAttribute("duration",
+                    workshop.getDurationAsString());
+        }
+        String formattedXml = getFormattedData(allWorkshopsXml.toString());
+        return new HandlerResponse(
+                new StringBuffer(formattedXml),
+                ALL_WORKSHOPS_STYLESHEET
+        );
     }
 
     private HandlerResponse getNewWorkshopResponse(Map parameters) {
