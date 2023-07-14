@@ -12,16 +12,7 @@ public class CatalogApp {
 
     private HandlerResponse executeActionAndGetResponse(String actionName, Map parameters) {
         if (actionName.equals(NEW_WORKSHOP)) {
-            String nextWorkshopID = workshopManager.getNextWorkshopID();
-            StringBuffer newWorkshopContents =
-                    workshopManager.createNewFileFromTemplate(
-                            nextWorkshopID,
-                            workshopManager.getWorkshopDir(),
-                            workshopManager.getWorkshopTemplate()
-                    );
-            workshopManager.addWorkshop(newWorkshopContents);
-            parameters.put("id",nextWorkshopID);
-            return executeActionAndGetResponse(ALL_WORKSHOPS, parameters);
+            return getNewWorkshopResponse(parameters);
         } else if (actionName.equals(ALL_WORKSHOPS)) {
             XMLBuilder allWorkshopsXml = new XMLBuilder("workshops");
             WorkshopRepository repository =
@@ -44,6 +35,19 @@ public class CatalogApp {
             );
         } // ...many more "else if" statements
         return new HandlerResponse(new StringBuffer(workshopManager.toString()), "General Style");
+    }
+
+    private HandlerResponse getNewWorkshopResponse(Map parameters) {
+        String nextWorkshopID = workshopManager.getNextWorkshopID();
+        StringBuffer newWorkshopContents =
+                workshopManager.createNewFileFromTemplate(
+                        nextWorkshopID,
+                        workshopManager.getWorkshopDir(),
+                        workshopManager.getWorkshopTemplate()
+                );
+        workshopManager.addWorkshop(newWorkshopContents);
+        parameters.put("id",nextWorkshopID);
+        return executeActionAndGetResponse(ALL_WORKSHOPS, parameters);
     }
 
     private String getFormattedData(String xmlString) {
