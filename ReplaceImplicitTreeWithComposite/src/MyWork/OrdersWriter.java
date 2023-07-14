@@ -1,5 +1,7 @@
 package MyWork;
 
+import javax.swing.text.html.HTML;
+
 public class OrdersWriter {
     private Orders orders;
 
@@ -13,25 +15,38 @@ public class OrdersWriter {
         writeOrderTo(xml);
         return xml.toString();
     }
+    public String getTagContents()
+    {
+        TagBuilder tagBuilder = new TagBuilder("orders");
+        writeOrderTo(tagBuilder);
+        return tagBuilder.toXml();
+    }
 
     private void writeOrderTo(StringBuilder xml) {
-        xml.append("<orders>");
+        TagNode ordersTag = new TagNode("orders");
         for (int i = 0; i < this.orders.orderCount(); i++)
         {
             Order order = this.orders.getOrder(i);
-            xml.append("<order");
-            xml.append(" id='");
-            xml.append(order.getOrderId());
-            xml.append("'>");
-            writeProductsTo(xml, order);
-
-            xml.append("</order>");
+            TagNode orderTag = new TagNode("order");
+            orderTag.addAttribute("id", String.valueOf(order.getOrderId()));
+            writeProductsTo(orderTag, order);
+            ordersTag.add(orderTag);
         }
-
-        xml.append("</orders>");
+        xml.append(ordersTag.toString());
     }
 
-    private void writeProductsTo(StringBuilder xml, Order order) {
+    private void writeOrderTo(TagBuilder tagBuilder) {
+
+        for (int i = 0; i < this.orders.orderCount(); i++)
+        {
+            Order order = this.orders.getOrder(i);
+            tagBuilder.addToParent("orders", "order");
+            tagBuilder.addAttribute("id", String.valueOf(order.getOrderId()));
+            writeProductsTo(tagBuilder, order);
+        }
+    }
+
+    private void writeProductsTo(TagNode orderTag, Order order) {
         for (int j = 0; j < order.productCount(); j++) {
             Product product = order.Product(j);
             TagNode productTag = new TagNode("product");
@@ -42,9 +57,25 @@ public class OrdersWriter {
                 productTag.addAttribute("size", this.sizeFor(product));
             }
 
-            writePriceTo(productTag, product);
             productTag.addValue(product.getName());
-            xml.append(productTag.toString());
+            writePriceTo(productTag, product);
+            orderTag.add(productTag);
+        }
+    }
+
+    private void writeProductsTo(TagBuilder tagBuilder, Order order) {
+        for (int j = 0; j < order.productCount(); j++) {
+            tagBuilder.addToParent("order","product");
+            Product product = order.Product(j);
+            tagBuilder.addAttribute("id", String.valueOf(product.getId()));
+            tagBuilder.addAttribute("color", this.colorFor(product));
+            if (product.getSize() != ProductSize.NotApplicable)
+            {
+                tagBuilder.addAttribute("size", this.sizeFor(product));
+            }
+            tagBuilder.addValue(product.getName());
+
+            writePriceTo(tagBuilder, product);
         }
     }
 
@@ -53,6 +84,18 @@ public class OrdersWriter {
         priceTag.addAttribute("currency", currencyFor(product));
         priceTag.addValue(product.getPrice());
         productTag.add(priceTag);
+    }
+
+    private TagNode tagPriceWriterCaller(TagNode productTag, Product product) {
+        TagBuilder tag = new TagBuilder("product");
+        writePriceTo(tag, product);
+        return tag.getRootNode();
+    }
+
+    private void writePriceTo(TagBuilder tagBuilder, Product product) {
+        tagBuilder.addToParent("product", "price");
+        tagBuilder.addAttribute("currency", currencyFor(product));
+        tagBuilder.addValue(product.getPrice());
     }
 
     private String currencyFor(Product product) {

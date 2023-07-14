@@ -47,15 +47,20 @@ public class TagNode {
     public String toString() {
         String result;
         if (this.children.isEmpty()) {
-            result = "<" + this.name + this.attributes + "/>";
+            if (this.value != null && !this.value.isEmpty()) {
+                result =  "<" + this.name + this.attributes + ">";
+                result += this.value + "</" + this.name + ">";
+            } else {
+                result = "<" + this.name + this.attributes + "/>";
+            }
         } else {
-            result = "<" + this.name + this.attributes + ">";
+            result = "<" + this.name + this.attributes + ">" + this.value;
 
             for (TagNode tagNode : this.children) {
                 result += tagNode.toString();
             }
 
-            result += this.value + "</" + this.name + ">";
+            result += "</" + this.name + ">";
         }
         return result;
     }

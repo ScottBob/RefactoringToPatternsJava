@@ -11,10 +11,13 @@
       <sourceFolder url="file://$MODULE_DIR$/ReplaceConditionalLogicWithStrategy/test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/ReplaceImplicitTreeWithComposite/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ReplaceImplicitTreeWithComposite/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/ReplaceConditionalDispatcherWithCommand/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ReplaceConditionalDispatcherWithCommand/test" isTestSource="true" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="hamcrest-core-1.3" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="junit-4.12" level="project" />
+    <orderEntry type="module" module-name="PolymorphicCreationWithFactoryMethod" />
   </component>
 </module>

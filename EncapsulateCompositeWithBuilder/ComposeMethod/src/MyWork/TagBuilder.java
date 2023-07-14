@@ -9,6 +9,10 @@ public class TagBuilder {
         currentNode = rootNode;
     }
 
+    public TagNode getRootNode() {
+        return rootNode;
+    }
+
     public String toXml() {
         return rootNode.toString();
     }
