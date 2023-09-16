@@ -21,13 +21,11 @@ public class NewWorkshopHandler extends Handler {
     }
 
     private StringBuffer newWorkshopContents(String nextWorkshopID) {
-        StringBuffer newWorkshopContents =
-                workshopManager().createNewFileFromTemplate(
-                        nextWorkshopID,
-                        workshopManager().getWorkshopDir(),
-                        workshopManager().getWorkshopTemplate()
-                );
-        return newWorkshopContents;
+        return workshopManager().createNewFileFromTemplate(
+                nextWorkshopID,
+                workshopManager().getWorkshopDir(),
+                workshopManager().getWorkshopTemplate()
+        );
     }
 
     private WorkshopManager workshopManager() {
