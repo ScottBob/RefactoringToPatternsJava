@@ -163,4 +163,17 @@ public class TagBuilderTest {
         String actual = builder.toJson();
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void test_json_build_sibling() {
+        String expected = "{\n    \"flavors\": {\n" +
+                "        \"flavor1\": \"\",\n" +
+                "        \"flavor2\": \"\"\n" +
+                "    }\n}\n";
+        TagBuilder builder = new TagBuilder("flavors");
+        builder.addChild("flavor1");
+        builder.addSibling("flavor2");
+        String actual = builder.toJson();
+        Assert.assertEquals(expected, actual);
+    }
 }
