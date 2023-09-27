@@ -135,4 +135,15 @@ public class TagBuilderTest {
         String actual = new TagBuilder("flavors").toJson();
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void test_build_one_json_child() {
+        String expected = "{\n    \"flavors\": {\n" +
+                "        \"flavor\": \"\"\n" +
+                "    }\n}";
+        TagBuilder builder = new TagBuilder("flavors");
+        builder.addChild("flavor");
+        String actual = builder.toJson();
+        Assert.assertEquals(expected, actual);
+    }
 }
