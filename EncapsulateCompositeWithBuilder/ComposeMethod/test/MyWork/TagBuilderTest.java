@@ -131,7 +131,7 @@ public class TagBuilderTest {
     public void test_build_one_json_node() {
         String expected = "{\n" +
                 "    \"flavors\": \"\"\n" +
-                "}";
+                "}\n";
         String actual = new TagBuilder("flavors").toJson();
         Assert.assertEquals(expected, actual);
     }
@@ -140,9 +140,26 @@ public class TagBuilderTest {
     public void test_build_one_json_child() {
         String expected = "{\n    \"flavors\": {\n" +
                 "        \"flavor\": \"\"\n" +
-                "    }\n}";
+                "    }\n}\n";
         TagBuilder builder = new TagBuilder("flavors");
         builder.addChild("flavor");
+        String actual = builder.toJson();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void test_build_json_children_of_children() {
+        String expected = "{\n    \"flavors\": {\n" +
+                "        \"flavor\": {\n" +
+                "            \"requirements\": {\n" +
+                "                \"requirement\": \"\"\n" +
+                "            }\n" +
+                "        }\n" +
+                "    }\n}\n";
+        TagBuilder builder = new TagBuilder("flavors");
+        builder.addChild("flavor");
+        builder.addChild("requirements");
+        builder.addChild("requirement");
         String actual = builder.toJson();
         Assert.assertEquals(expected, actual);
     }

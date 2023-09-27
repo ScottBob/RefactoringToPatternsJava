@@ -78,11 +78,11 @@ public class TagNode {
         if (this.children.isEmpty()) {
             result = OPEN + indent + identifier(this.name, "") + indent + CLOSE;
         } else {
-            result = OPEN + indent + identifier(this.name) + indent;
+            result = OPEN + indent + identifier(this.name);
             for (TagNode tagNode : this.children) {
                 result += tagNode.toJson(indentLevel + 1);
             }
-            result += "}";
+            result += indent + CLOSE;
         }
         return result;
     }
