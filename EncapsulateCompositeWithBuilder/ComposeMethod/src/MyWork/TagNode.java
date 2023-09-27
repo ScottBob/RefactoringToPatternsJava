@@ -71,14 +71,14 @@ public class TagNode {
 
     public String toJson(int indentLevel) {
         String result;
+        String indent = new String(new char[indentLevel * 4]).replace("\0", " ");
 
         if (this.children.isEmpty()) {
-            result = "{\n" + "    \"" + this.name + "\": \"" + this.attributes + "\"\n" + "}";
-
+            result = "{\n" + indent + "    \"" + this.name + "\": \"" + this.attributes + "\"\n" + indent + "}";
         } else {
             result = "{\n    \"" + this.name + "\": ";
             for (TagNode tagNode : this.children) {
-                result += tagNode.toJson();
+                result += tagNode.toJson(indentLevel + 1);
             }
             result += "\n}";
         }
