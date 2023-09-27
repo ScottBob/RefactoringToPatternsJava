@@ -66,8 +66,22 @@ public class TagNode {
     }
 
     public String toJson() {
+        return toJson(0);
+    }
+
+    public String toJson(int indentLevel) {
         String result;
-        result = "{\n" + "    \"" + this.name + "\": \"" + this.attributes + "\"\n" + "}";
+
+        if (this.children.isEmpty()) {
+            result = "{\n" + "    \"" + this.name + "\": \"" + this.attributes + "\"\n" + "}";
+
+        } else {
+            result = "{\n    \"" + this.name + "\": ";
+            for (TagNode tagNode : this.children) {
+                result += tagNode.toJson();
+            }
+            result += "\n}";
+        }
         return result;
     }
 }
