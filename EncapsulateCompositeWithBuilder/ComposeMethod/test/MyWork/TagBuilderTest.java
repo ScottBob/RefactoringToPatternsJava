@@ -126,4 +126,13 @@ public class TagBuilderTest {
         builder.addValue("IDE");
         Assert.assertEquals(expected, builder.toXml());
     }
+
+    @Test
+    public void test_build_one_json_node() {
+        String expected = "{\n" +
+                "    \"flavors\": \"\"\n" +
+                "}";
+        String actual = new TagBuilder("flavors").toJson();
+        Assert.assertEquals(expected, actual);
+    }
 }
