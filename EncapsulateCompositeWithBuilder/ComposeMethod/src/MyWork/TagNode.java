@@ -72,16 +72,25 @@ public class TagNode {
     public String toJson(int indentLevel) {
         String result;
         String indent = new String(new char[indentLevel * 4]).replace("\0", " ");
+        final String OPEN = "{\n";
+        final String CLOSE = "}\n";
 
         if (this.children.isEmpty()) {
-            result = "{\n" + indent + "    \"" + this.name + "\": \"" + this.attributes + "\"\n" + indent + "}";
+            result = OPEN + indent + identifier(this.name, "") + indent + CLOSE;
         } else {
-            result = "{\n    \"" + this.name + "\": ";
+            result = OPEN + indent + identifier(this.name) + indent;
             for (TagNode tagNode : this.children) {
                 result += tagNode.toJson(indentLevel + 1);
             }
-            result += "\n}";
+            result += "}";
         }
         return result;
+    }
+
+    private String identifier(String name) {
+        return "    \"" + name + "\": ";
+    }
+    private String identifier(String name, String value) {
+        return "    \"" + name + "\": \"" + value + "\"\n";
     }
 }
