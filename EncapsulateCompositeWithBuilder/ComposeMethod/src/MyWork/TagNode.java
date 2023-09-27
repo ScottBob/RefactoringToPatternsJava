@@ -64,4 +64,10 @@ public class TagNode {
         }
         return result;
     }
+
+    public String toJson() {
+        String result;
+        result = "{\n" + "    \"" + this.name + "\": \"" + this.attributes + "\"\n" + "}";
+        return result;
+    }
 }

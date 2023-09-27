@@ -56,4 +56,8 @@ public class TagBuilder {
     public void addValue(String value) {
         currentNode.addValue(value);
     }
+
+    public String toJson() {
+        return rootNode.toJson();
+    }
 }
