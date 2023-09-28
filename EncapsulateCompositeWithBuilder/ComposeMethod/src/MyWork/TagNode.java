@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TagNode {
+    private final String OPEN = "{\n";
+    private final String CLOSE = "}\n";
     private TagNode parent;
     private StringBuilder attributes;
     private List<TagNode> children = new ArrayList<>();
@@ -47,7 +49,7 @@ public class TagNode {
     public String toString() {
         String result;
         if (this.children.isEmpty()) {
-            if (this.value != null && !this.value.isEmpty()) {
+            if (!this.value.isEmpty()) {
                 result =  "<" + this.name + this.attributes + ">";
                 result += this.value + "</" + this.name + ">";
             } else {
@@ -66,31 +68,32 @@ public class TagNode {
     }
 
     public String toJson() {
-        return toJson(0);
+        return OPEN + toJson(1) + "\n" + CLOSE;
     }
 
-    public String toJson(int indentLevel) {
-        String result;
-        String indent = new String(new char[indentLevel * 4]).replace("\0", " ");
-        final String OPEN = "{\n";
-        final String CLOSE = "}\n";
-
-        if (this.children.isEmpty()) {
-            result = OPEN + indent + identifier(this.name, "") + indent + CLOSE;
-        } else {
-            result = OPEN + indent + identifier(this.name);
-            for (TagNode tagNode : this.children) {
-                result += tagNode.toJson(indentLevel + 1);
+    private String toJson(int indentLevel) {
+        String indent = getIndent(indentLevel);
+        StringBuilder line = new StringBuilder();
+        line.append(indent);
+        line.append("\"").append(name).append("\": ");
+        if (!children.isEmpty()) {
+            List<String> members = new ArrayList<>();
+            line.append("{\n");
+            for (TagNode child : children) {
+                members.add(child.toJson(indentLevel + 1));
             }
-            result += indent + CLOSE;
+            line.append(String.join(",\n", members));
+            line.append("\n").append(indent).append("}");
+        } else {
+            line.append("\"\"");
         }
-        return result;
+        return line.toString();
     }
 
-    private String identifier(String name) {
-        return "    \"" + name + "\": ";
+    private static String getIndent(int indentLevel) {
+        String format = "%" + indentLevel * 4 + "s";
+        String indent = indentLevel == 0 ? "" : String.format(format, "");
+        return indent;
     }
-    private String identifier(String name, String value) {
-        return "    \"" + name + "\": \"" + value + "\"\n";
-    }
+
 }
