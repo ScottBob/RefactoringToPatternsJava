@@ -1,22 +1,20 @@
 package MyWork;
 
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class TagNode {
     private final String OPEN = "{\n";
     private final String CLOSE = "}\n";
     private TagNode parent;
-    private Map<String, String> attributeMap;
+    private Map<String, String> attributes;
     private List<TagNode> children = new ArrayList<>();
     private String name;
     private String value = "";
 
     public TagNode(String name) {
         this.name = name;
-        this.attributeMap = new TreeMap<>();
+        this.attributes = new LinkedHashMap<>();
     }
 
     private void setParent(TagNode parent) {
@@ -37,17 +35,17 @@ public class TagNode {
     }
 
     public void addAttribute(String attribute, String value) {
-        attributeMap.put(attribute, value);
+        attributes.put(attribute, value);
     }
 
     public String attributesInXmlFormat() {
         ArrayList<String> lines = new ArrayList<>();
-        for (String key : attributeMap.keySet()) {
+        for (String key : attributes.keySet()) {
             StringBuilder line = new StringBuilder();
             line.append(" ");
             line.append(key);
             line.append("='");
-            line.append(attributeMap.get(key));
+            line.append(attributes.get(key));
             line.append("'");
             lines.add(line.toString());
         }
@@ -106,9 +104,42 @@ public class TagNode {
                 }
                 line.append(String.join(",\n", members));
             }
+            line.append(getJsonAttributesAndValues(indentLevel));
             line.append("\n").append(indent).append("}");
         } else {
-            line.append("\"\"");
+            if (attributes.isEmpty()) {
+                line.append("\"\"");
+            } else {
+                line.append("{");
+                line.append(getJsonAttributesAndValues(indentLevel));
+                line.append("\n").append(getIndent(indentLevel)).append("}");
+            }
+        }
+        return line.toString();
+    }
+
+    private String getJsonAttributesAndValues(int indentLevel) {
+        StringBuilder line = new StringBuilder();
+        String indent;
+        // The value is always last and is named "__text"
+        //  otherwise it's treated just like any attribute
+        if (!value.isEmpty()) {
+            attributes.put("_text", value);
+        }
+        if (!attributes.isEmpty()) {
+            indent = getIndent(indentLevel + 1);
+            if (!children.isEmpty()) {
+                line.append(",");
+            }
+            List<String> members = new ArrayList<>();
+            for (String key : attributes.keySet()) {
+                StringBuffer attLine = new StringBuffer();
+                attLine.append("\n").append(indent);
+                attLine.append("\"_").append(key).append("\": ");
+                attLine.append("\"").append(attributes.get(key)).append("\"");
+                members.add(attLine.toString());
+            }
+            line.append(String.join(",", members));
         }
         return line.toString();
     }
