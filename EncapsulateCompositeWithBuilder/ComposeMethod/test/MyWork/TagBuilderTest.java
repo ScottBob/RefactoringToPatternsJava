@@ -207,16 +207,23 @@ public class TagBuilderTest {
 
     @Test
     public void test_json_attributes_and_values() {
-        String expected = "<flavor name='Test-Driven Development'>" +
-                "<requirements>" +
-                "<requirement type='hardware'>" +
-                "1 computer for every 2 participants" +
-                "</requirement>" +
-                "<requirement type='software'>" +
-                "IDE" +
-                "</requirement>" +
-                "</requirements>" +
-                "</flavor>";
+        String expected = "{\n" +
+                "    \"flavor\": {\n" +
+                "        \"requirements\": {\n" +
+                "            \"requirement\": [\n" +
+                "                {\n" +
+                "                    \"_type\": \"hardware\",\n" +
+                "                    \"__text\": \"1 computer for every 2 participants\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"_type\": \"software\",\n" +
+                "                    \"__text\": \"IDE\"\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        },\n" +
+                "        \"_name\": \"Test-Driven Development\"\n" +
+                "    }\n" +
+                "}\n";
         TagBuilder builder = new TagBuilder("flavor");
         builder.addAttribute("name", "Test-Driven Development");
         builder.addChild("requirements");
