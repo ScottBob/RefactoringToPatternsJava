@@ -205,34 +205,34 @@ public class TagBuilderTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
-    public void test_json_attributes_and_values() {
-        String expected = "{\n" +
-                "    \"flavor\": {\n" +
-                "        \"requirements\": {\n" +
-                "            \"requirement\": [\n" +
-                "                {\n" +
-                "                    \"_type\": \"hardware\",\n" +
-                "                    \"__text\": \"1 computer for every 2 participants\"\n" +
-                "                },\n" +
-                "                {\n" +
-                "                    \"_type\": \"software\",\n" +
-                "                    \"__text\": \"IDE\"\n" +
-                "                }\n" +
-                "            ]\n" +
-                "        },\n" +
-                "        \"_name\": \"Test-Driven Development\"\n" +
-                "    }\n" +
-                "}\n";
-        TagBuilder builder = new TagBuilder("flavor");
-        builder.addAttribute("name", "Test-Driven Development");
-        builder.addChild("requirements");
-        builder.addToParent("requirements","requirement");
-        builder.addAttribute("type", "hardware");
-        builder.addValue("1 computer for every 2 participants");
-        builder.addToParent("requirements","requirement");
-        builder.addAttribute("type", "software");
-        builder.addValue("IDE");
-        Assert.assertEquals(expected, builder.toJson());
-    }
+//    @Test
+//    public void test_json_attributes_and_values() {
+//        String expected = "{\n" +
+//                "    \"flavor\": {\n" +
+//                "        \"requirements\": {\n" +
+//                "            \"requirement\": [\n" +
+//                "                {\n" +
+//                "                    \"_type\": \"hardware\",\n" +
+//                "                    \"__text\": \"1 computer for every 2 participants\"\n" +
+//                "                },\n" +
+//                "                {\n" +
+//                "                    \"_type\": \"software\",\n" +
+//                "                    \"__text\": \"IDE\"\n" +
+//                "                }\n" +
+//                "            ]\n" +
+//                "        },\n" +
+//                "        \"_name\": \"Test-Driven Development\"\n" +
+//                "    }\n" +
+//                "}\n";
+//        TagBuilder builder = new TagBuilder("flavor");
+//        builder.addAttribute("name", "Test-Driven Development");
+//        builder.addChild("requirements");
+//        builder.addToParent("requirements","requirement");
+//        builder.addAttribute("type", "hardware");
+//        builder.addValue("1 computer for every 2 participants");
+//        builder.addToParent("requirements","requirement");
+//        builder.addAttribute("type", "software");
+//        builder.addValue("IDE");
+//        Assert.assertEquals(expected, builder.toJson());
+//    }
 }

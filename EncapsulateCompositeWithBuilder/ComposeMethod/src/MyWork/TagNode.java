@@ -2,19 +2,21 @@ package MyWork;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class TagNode {
     private final String OPEN = "{\n";
     private final String CLOSE = "}\n";
     private TagNode parent;
-    private StringBuilder attributes;
+    private Map<String, String> attributeMap;
     private List<TagNode> children = new ArrayList<>();
     private String name;
     private String value = "";
 
     public TagNode(String name) {
         this.name = name;
-        this.attributes = new StringBuilder();
+        this.attributeMap = new TreeMap<>();
     }
 
     private void setParent(TagNode parent) {
@@ -35,11 +37,21 @@ public class TagNode {
     }
 
     public void addAttribute(String attribute, String value) {
-        this.attributes.append(" ");
-        this.attributes.append(attribute);
-        this.attributes.append("='");
-        this.attributes.append(value);
-        this.attributes.append("'");
+        attributeMap.put(attribute, value);
+    }
+
+    public String attributesInXmlFormat() {
+        ArrayList<String> lines = new ArrayList<>();
+        for (String key : attributeMap.keySet()) {
+            StringBuilder line = new StringBuilder();
+            line.append(" ");
+            line.append(key);
+            line.append("='");
+            line.append(attributeMap.get(key));
+            line.append("'");
+            lines.add(line.toString());
+        }
+        return String.join(", ", lines);
     }
 
     public void addValue(String value) {
@@ -50,13 +62,13 @@ public class TagNode {
         String result;
         if (this.children.isEmpty()) {
             if (!this.value.isEmpty()) {
-                result =  "<" + this.name + this.attributes + ">";
+                result =  "<" + this.name + attributesInXmlFormat() + ">";
                 result += this.value + "</" + this.name + ">";
             } else {
-                result = "<" + this.name + this.attributes + "/>";
+                result = "<" + this.name + attributesInXmlFormat() + "/>";
             }
         } else {
-            result = "<" + this.name + this.attributes + ">" + this.value;
+            result = "<" + this.name + attributesInXmlFormat() + ">" + this.value;
 
             for (TagNode tagNode : this.children) {
                 result += tagNode.toString();
