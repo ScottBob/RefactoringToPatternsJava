@@ -68,21 +68,32 @@ public class TagNode {
     }
 
     public String toJson() {
-        return OPEN + toJson(1) + "\n" + CLOSE;
+        return OPEN + toJson(1, false) + "\n" + CLOSE;
     }
 
-    private String toJson(int indentLevel) {
+    private String toJson(int indentLevel, boolean isArrayChild) {
         String indent = getIndent(indentLevel);
         StringBuilder line = new StringBuilder();
         line.append(indent);
-        line.append("\"").append(name).append("\": ");
+        if (!isArrayChild) {
+            line.append("\"").append(name).append("\": ");
+        }
         if (!children.isEmpty()) {
             List<String> members = new ArrayList<>();
-            line.append("{\n");
-            for (TagNode child : children) {
-                members.add(child.toJson(indentLevel + 1));
+            line.append(OPEN);
+            if (isChildArray()) {
+                line.append(indent).append("    \"").append(children.get(0).name).append("\": [\n");
+                for (TagNode child : children) {
+                    members.add(child.toJson(indentLevel + 2, true));
+                }
+                line.append(String.join(",\n", members));
+                line.append("\n").append(indent).append("    ]");
+            } else {
+                for (TagNode child : children) {
+                    members.add(child.toJson(indentLevel + 1, false));
+                }
+                line.append(String.join(",\n", members));
             }
-            line.append(String.join(",\n", members));
             line.append("\n").append(indent).append("}");
         } else {
             line.append("\"\"");
@@ -92,8 +103,20 @@ public class TagNode {
 
     private static String getIndent(int indentLevel) {
         String format = "%" + indentLevel * 4 + "s";
-        String indent = indentLevel == 0 ? "" : String.format(format, "");
-        return indent;
+        return (indentLevel == 0) ? "" : String.format(format, "");
     }
 
+    private boolean isChildArray() {
+        String lastName = "";
+        for (TagNode node : children) {
+            if (lastName.isEmpty()) {
+                lastName = node.name;
+                continue;
+            }
+            if (lastName.equals(node.name)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
