@@ -176,4 +176,32 @@ public class TagBuilderTest {
         String actual = builder.toJson();
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void test_repeating_json_children_and_grandchildren_introducing_a_json_array() {
+        String expected = "{\n" +
+                "    \"flavors\": {\n" +
+                "        \"flavor\": [\n" +
+                "            {\n" +
+                "                \"requirements\": {\n" +
+                "                    \"requirement\": \"\"\n" +
+                "                }\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"requirements\": {\n" +
+                "                    \"requirement\": \"\"\n" +
+                "                }\n" +
+                "            }\n" +
+                "        ]\n" +
+                "    }\n" +
+                "}\n";
+        TagBuilder builder = new TagBuilder("flavors");
+        for (int i = 0; i < 2; ++i) {
+            builder.addToParent("flavors", "flavor");
+            builder.addChild("requirements");
+            builder.addChild("requirement");
+        }
+        String actual = builder.toJson();
+        Assert.assertEquals(expected, actual);
+    }
 }
